@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment-darkblue
+  labels:
+    app: webapp
+    color: darkblue
+    type: deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: webapp
+      color: darkblue
+      type: deployment
+  template:
+    metadata:
+      labels:
+        app: webapp
+        color: darkblue
+        type: deployment
+    spec:
+      containers:
+      - name: webapp
+        image: akslab88lu9i.azurecr.io/webapp-color:20250127_185036
+        env:
+        - name: APP_COLOR
+          value: darkblue
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+      terminationGracePeriodSeconds: 5

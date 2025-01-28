@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+    type: stateful
+spec:
+  serviceName: webapp-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+      type: stateful
+  template:
+    metadata:
+      labels:
+        app: webapp
+        type: stateful
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: webapp
+        image: akslab88lu9i.azurecr.io/webapp-color:20250128_101653
+        env:
+        - name: STATIC
+          value: "true"
+        - name: APP_COLOR
+          value: "pink"
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+      
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: webapp-stateful
+    type: stateful
+  name: webapp-stateful
+spec:
+  type: ClusterIP
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: webapp
+    type: stateful
+---

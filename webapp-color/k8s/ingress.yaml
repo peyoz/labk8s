@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-webapp
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: webapprouting.kubernetes.azure.com
+  rules:
+  - host: "labk8s.nposervices.com"
+    http:
+      paths:
+      - path: /app(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: webapp
+            port:
+              name: web
+      - path: /sts(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: webapp-stateful
+            port:
+              name: web
+  tls:
+  - hosts:
+    - labk8s.nposervices.com
