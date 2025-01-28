@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment-antiffinity
+  labels:
+    app: webapp-anti
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp-anti
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: webapp-anti
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - webapp-anti
+            topologyKey: topology.kubernetes.io/zone
+      containers:
+      - name: webapp
+        image: akslab88lu9i.azurecr.io/webapp-color:20250127_185036
+        env:
+        - name: APP_COLOR
+          value: blue2
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+      terminationGracePeriodSeconds: 5

@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - deployment-red.yaml
   - deployment-darkblue.yaml
+  - deployment-antiaffinity.yaml
   - sts.yaml
   - svc.yaml
   - ingress.yaml
