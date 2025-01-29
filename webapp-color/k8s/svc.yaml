@@ -5,7 +5,6 @@ metadata:
     app: webapp
   name: webapp
 spec:
-  clusterIP: 10.0.27.125
   ports:
   - name: web
     port: 8080
@@ -14,4 +13,60 @@ spec:
   selector:
     app: webapp
     type: deployment
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: webapp
+    type: deployment
+    color: red
+  name: webapp-red
+spec:
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: webapp
+    type: deployment
+    color: red
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: webapp
+    type: deployment
+    color: darkblue
+  name: webapp-darkblue
+spec:
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: webapp
+    type: deployment
+    color: darkblue
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: webapp
+  name: webapp-rainbow
+spec:
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: webapp
   type: ClusterIP

@@ -6,7 +6,7 @@ metadata:
     app: webapp
 spec:
   containers:
-  - image: akslab88lu9i.azurecr.io/webapp-color:20250127_175424
+  - image: akslab88lu9i.azurecr.io/webapp-color:20250128_140459
     name: webapp
     ports:
     - name: web

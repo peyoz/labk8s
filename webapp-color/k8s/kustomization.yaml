@@ -4,6 +4,7 @@ resources:
   - deployment-red.yaml
   - deployment-darkblue.yaml
   - deployment-antiaffinity.yaml
+  - network-policy.yaml
   - sts.yaml
   - svc.yaml
   - ingress.yaml

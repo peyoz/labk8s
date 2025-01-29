@@ -21,7 +21,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: webapp
-        image: akslab88lu9i.azurecr.io/webapp-color:20250128_101653
+        image: akslab88lu9i.azurecr.io/webapp-color:1.0
         env:
         - name: STATIC
           value: "true"

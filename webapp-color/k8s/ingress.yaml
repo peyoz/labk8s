@@ -18,11 +18,32 @@ spec:
             name: webapp
             port:
               name: web
+      - path: /darkblue(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: webapp-darkblue
+            port:
+              name: web
+      - path: /red(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: webapp-red
+            port:
+              name: web
       - path: /sts(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: webapp-stateful
+            port:
+              name: web
+      - path: /rainbow(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: webapp-rainbow
             port:
               name: web
   tls:

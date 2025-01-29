@@ -7,7 +7,7 @@ metadata:
     color: red
     type: deployment
 spec:
-  replicas: 3  # Puoi modificare questo valore per il numero di repliche desiderato
+  replicas: 3
   selector:
     matchLabels:
       app: webapp
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: akslab88lu9i.azurecr.io/webapp-color:20250127_185036
+        image: akslab88lu9i.azurecr.io/webapp-color:broken
         env:
         - name: APP_COLOR
           value: red
