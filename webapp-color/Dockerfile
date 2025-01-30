@@ -1,8 +1,11 @@
-FROM python:3.6-alpine
+FROM python:3.12-alpine
 
-RUN pip install flask
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-COPY . /opt/
+COPY app.py /opt/
+COPY templates /opt/templates
+
 
 EXPOSE 8080
 
